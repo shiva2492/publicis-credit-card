@@ -1,0 +1,15 @@
+{
+  "verbose": true,
+  "testEnvironment": "node",
+  "setupTestFrameworkScriptFile": "./test/unit/lib/setup.ts",
+  "transform": {
+     ".(ts|tsx)": "<rootDir>/test/preprocessor.js"
+  },
+  "testMatch": ["**/test/**/*test.ts"],
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "json"
+  ]
+}

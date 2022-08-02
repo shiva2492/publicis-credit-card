@@ -1,0 +1,160 @@
+{
+    "openapi": "3.0.0",
+    "servers": [],
+    "info": {
+        "title": "Publicis-Credit-Card",
+        "description": "Credit Card Processing Service",
+        "version": "1.0.0"
+    },
+    "tags": [
+        {
+            "name": "CreditCard"
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "CreditCard"
+                ],
+                "summary": "Show API information",
+                "description": "This is a public route",
+                "operationId": "showApiInfo",
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    }
+                }
+            }
+        },
+        "/credit-card": {
+            "get": {
+                "tags": [
+                    "CreditCard"
+                ],
+                "summary": "List all Credit Cards",
+                "description": "Returns all Credit Cards",
+                "operationId": "FindAll",
+                "security": [],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CreditCard"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "CreditCard"
+                ],
+                "summary": "Create new Credit Card",
+                "description": "",
+                "operationId": "create CreditCard",
+                "security": [],
+                "responses": {
+                    "201": {
+                        "description": "created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/CreditCard"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewCreditCard"
+                            }
+                        }
+                    },
+                    "description": "Credit Card object that needs to be added to the database",
+                    "required": true
+                }
+            }
+        }
+    },
+    "components": {
+        "requestBodies": {
+        },
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "NewCreditCard": {
+                "type": "object",
+                "properties": {
+                    "limit": {
+                        "type": "number"
+                    },
+                    "cardNumber": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CreditCard": {
+                "title": "Credit-Card",
+                "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "limit": {
+                                "type": "number"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "cardNumber": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
